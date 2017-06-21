@@ -34,7 +34,7 @@ class Stand extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function bookin(){
-    	return $this->belongsTo(Bookin::class);
+    	return $this->hasOne(Bookin::class);
     }
 
 

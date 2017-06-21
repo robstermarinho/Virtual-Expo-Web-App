@@ -16,11 +16,15 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->index();
             $table->string('name')->nullable();
             $table->string('admin')->default(Company::REGULAR_COMPANY);
             $table->string('logo_url');
             $table->string('document_url')->nullable();
             $table->timestamps();
+
+            // Fofeign keys
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
