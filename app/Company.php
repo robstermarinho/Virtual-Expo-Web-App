@@ -19,12 +19,20 @@ class Company extends Model
     protected $table = 'companies';
 
     /**
+     * Roles in the system
+     *
+     * @var string
+     */ 	
+    const ADMIN_COMPANY = 'true';
+    const REGULAR_COMPANY = 'false';
+    
+    /**
      * The attributes that are mass assignable
      *
      * @var array
      */
     protected $fillable = [
-        'company_name', 'logo_url', 'document_url',
+    	'name', 'admin','logo_url', 'document_url'
     ];
 
     /**
@@ -36,4 +44,12 @@ class Company extends Model
     	return $this->belongsTo(User::class);
     }
     
+    /**
+     * It returns TRUE if the company has admin role
+     *
+     * @return boolean
+     */
+    public function isAdmin(){
+    	return $this->admin == Company::ADMIN_COMPANY;
+    }
 }

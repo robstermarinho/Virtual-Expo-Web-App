@@ -11,6 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stand extends Model
 {
+
+    /**
+     * It defines the availability of the stands
+     *
+     */
+	const AVAILABLE_STAND = 'available';
+	const UNAVAILABLE_STAND = 'unavailable';
+
     /**
      * It returns the event that this stand refers to
      *
