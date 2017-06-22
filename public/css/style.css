@@ -1,1 +1,19 @@
 .angular-google-map-container { height: 300px; }
+
+
+.hall_map img{
+  border:1px solid #cc983f;
+	position:relative;
+  display:block;
+  
+}
+.hall_map svg{
+	position:absolute;
+  display:block;
+  top:0;
+}
+
+.hall_map svg a{
+	cursor:pointer;
+}
+

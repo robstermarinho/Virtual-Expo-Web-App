@@ -25,6 +25,8 @@ class CreateBookinsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('event_id')->references('id')->on('events');
             $table->foreign('stand_id')->references('id')->on('stands');
+            // A composite unique index
+            $table->unique(['user_id','stand_id'], 'ck_user_stand');
         });
     }
 

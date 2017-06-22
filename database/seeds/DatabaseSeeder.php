@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 	     * Disable Foreign Key Checks
 	     *
 	     */   
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+	    DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 	    /**
 	     * We have to truncate all tables (original state)
 	     *
@@ -37,20 +37,74 @@ class DatabaseSeeder extends Seeder
 	     *
 	     */  
 
-	    $usersQuantity = 10;
-	    $eventQuantity = 5;
-	    $standQuantity = 100;
-	    $bookinQuantity = 30;
+	    $usersQuantity = 3;
+	    $eventQuantity = 3;
+	    $standQuantity = 12;
+	    $bookinQuantity = 4;
 
 	    /**
-	     * Create the users and their companies
+	     * Creating the users and their companies
 	     *
 	     */ 
 	    factory(User::class, $usersQuantity)->create()->each(function($user){
-	    	factory(Company::class)->create(['user_id' => $user]);
+	    	factory(Company::class)->create(['user_id' => $user, 'logo_url' => 'company-logo.png']);
 	    });
-	    factory(Event::class, $eventQuantity)->create();
-	    factory(Stand::class, $standQuantity)->create();
+
+	    /**
+	     * Creating the events
+	     *
+	     */ 	    
+	    factory(Event::class)->create([
+	    	'name' => "Beach Park Conference",
+	    	'location' => "Rua Porto das Dunas, 2734 - Porto das Dunas, Aquiraz - CE, 61700-000",
+	    	'photo_url' => "beach_park.jpg"
+	    	]);
+
+	    $event_center = factory(Event::class)->create([
+	    	'name' => "IEEE Conference 2017",
+	    	'location' => "Av. Washington Soares, 999 - Edson Queiroz, Fortaleza - CE, 60811-341",
+	    	'photo_url' => "event_center_ceara.jpg"
+	    	]);
+
+	    factory(Event::class)->create([
+	    	'name' => "CBF Conference",
+	    	'location' => "Av. Alberto Craveiro, 2901 - Castelão, Fortaleza - CE, 60861-211",
+	    	'photo_url' => "castelao.jpg"
+	    	]);
+
+
+	    /**
+	     * Creating the stands
+	     *
+	     */
+	    factory(Stand::class)->create([
+	    	'name' => 'Pecém Stand',
+	    	'event_id' => $event_center->id,
+	    	'photo_url' => 'stand_1'
+	    	]);
+	    factory(Stand::class)->create([
+	    	'name' => 'Taíba Stand',
+	    	'event_id' => $event_center->id,
+	    	'photo_url' => 'stand_2'
+	    	]);
+	    factory(Stand::class)->create([
+	    	'name' => 'Mundaú Stand',
+	    	'event_id' => $event_center->id,
+	    	'photo_url' => 'stand_3'
+	    	]);
+	    factory(Stand::class)->create([
+	    	'name' => 'Almofala Stand',
+	    	'event_id' => $event_center->id,
+	    	'photo_url' => 'stand_4'
+	    	]);
+	    factory(Stand::class)->create([
+	    	'name' => 'Jericoacoara Stand',
+	    	'event_id' => $event_center->id,
+	    	'photo_url' => 'stand_5'
+	    	]);
+
+
+	    //factory(Stand::class, $standQuantity)->create();
 
 	    /**
 	     * Create the bookins and change their stand to unavailabe

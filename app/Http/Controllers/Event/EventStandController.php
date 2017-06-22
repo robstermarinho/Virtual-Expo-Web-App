@@ -15,7 +15,12 @@ class EventStandController extends Controller
      */
     public function index(Event $event)
     {
-        $stands = $event->stands;
+
+        $stands = $event->stands()
+        ->with('bookin.user.company')
+        ->get();
+        //->pluck('bookin');
+
         return response()->json($stands , 200);
     }
 

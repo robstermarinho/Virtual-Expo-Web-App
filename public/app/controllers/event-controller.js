@@ -5,7 +5,13 @@ angular.module('virtualExpoApp').controller('EventController', ['$scope', '$http
 	$scope.single_event = {};
 	$scope.stands = {};
 
-	// Get a single event information
+	// Get svg polygon params
+	$http.get('files/events/event_' +  $scope.eventId + '/hall_map/svg_params.json')
+	.then(function(response){
+		$scope.svg_params = response.data;            
+	});
+
+	// Get a single event
 	$http.get('/api/events/' + $scope.eventId)
 	.then(function successCallback(response) {
 		if (response.data) {
@@ -16,16 +22,28 @@ angular.module('virtualExpoApp').controller('EventController', ['$scope', '$http
 			$scope.message = "Server Error";
 		});
 	
-	// Get a list of stands in an event
+	// Get a list of stands for this event
 	$http.get('/api/events/' + $scope.eventId + '/stands')
 	.then(function successCallback(response) {
+		var result = [];
 		if (response.data) {
-			$scope.stands = response.data;
+			response.data.forEach(function(stand){
+				result.push({
+					info: stand,
+					svg: $scope.svg_params[stand.photo_url]
+				});
+			});
+			$scope.stands = result;
 		} else {
 			$scope.message = "No events to show";
 		}}, function errorCallback(error) {
 			$scope.message = "Server Error";
 		});
 
-	
+	// Open stand details
+	$scope.standDetail = function(stand){
+		
+	}
+
+
 }]);
