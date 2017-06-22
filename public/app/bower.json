@@ -1,0 +1,26 @@
+{
+  "name": "Virtual Expo App",
+  "authors": [
+    "˜Robert <robstermarinho@gmail.com>"
+  ],
+  "description": "A virtual exposition application that allow companies to book their place in virtual expositions in different exposition events.",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4"
+  },
+  "devDependencies": {
+    "angular-google-maps": "^2.4.1",
+    "angular-route": "^1.6.4",
+    "angular-bootstrap": "^2.5.0",
+    "bootstrap": "^3.3.7"
+  }
+}
