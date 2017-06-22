@@ -110,5 +110,6 @@
 
     <!-- Angular controllers -->
     <script src="<?=asset('app/controllers/home-controller.js')?>"></script>
+    <script src="<?=asset('app/controllers/event-controller.js')?>"></script>
 </body>
 </html>

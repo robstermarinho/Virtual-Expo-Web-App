@@ -25,6 +25,6 @@ class Event extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function stands(){
-        return $this->hasMany(Stand::class);
+        return $this->hasMany(Stand::class, 'event_id');
     }    
 }

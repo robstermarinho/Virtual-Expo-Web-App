@@ -17,3 +17,10 @@ use Illuminate\Http\Request;
  * Events
  */
 Route::resource('events', 'Event\EventController', ['only' => ['index', 'show']]);
+Route::resource('events.stands', 'Event\EventStandController', ['only' => ['index']]);
+
+
+/**
+ * Users
+ */
+Route::resource('users', 'User\UserController', ['only' => ['index', 'show']]);

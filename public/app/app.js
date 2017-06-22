@@ -17,4 +17,9 @@ var virtualExpoApp = angular.module('virtualExpoApp',
         controller: 'HomeController'
     });
 
+    //Event page
+    $routeProvider.when('/event/:eventId',{
+        templateUrl: 'app/partials/event.html',
+        controller: 'EventController'
+    });
 });
