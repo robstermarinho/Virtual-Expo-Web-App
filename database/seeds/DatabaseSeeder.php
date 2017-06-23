@@ -6,6 +6,7 @@ use App\Stand;
 use App\Bookin;
 use App\Company;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
 	    Stand::truncate();
 	    Event::truncate();
 
+
 	    /**
 	     * Run factories
 	     *
@@ -47,7 +49,9 @@ class DatabaseSeeder extends Seeder
 	     *
 	     */ 
 	    factory(User::class, $usersQuantity)->create()->each(function($user){
-	    	factory(Company::class)->create(['user_id' => $user, 'logo_url' => 'company-logo.png']);
+	    	factory(Company::class)->create(['user_id' => $user, 
+	    		'logo_url' => 'company-logo.png'
+	    	]);
 	    });
 
 	    /**
@@ -109,7 +113,22 @@ class DatabaseSeeder extends Seeder
 	     */ 
 
 
-	    factory(Bookin::class, $bookinQuantity)->create();
+	    factory(Bookin::class, $bookinQuantity)
+	    ->create()
+	    ->each(function($bookin){
+	    	// Get the stand
+	    	$stand = $bookin->stand;
+
+	    	// Choose a name to the doc file
+	    	$file_name = 'marketing_doc.txt';
+	    	$doc_url = 'events/event_' . $bookin->event->id . '/stand_' . $stand->id . '/' .$file_name;
+
+	    	// Creating the marketing documents
+	    	Storage::disk('files')->put($doc_url, 'Marketing Doc for '.$stand->name);
+
+	    	$stand->document_url = $file_name;
+	    	$stand->save();
+	    });
 
 
 	}

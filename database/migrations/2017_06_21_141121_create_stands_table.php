@@ -23,6 +23,7 @@ class CreateStandsTable extends Migration
             $table->string('dimensions');
             $table->string('photo_url');
             $table->string('status')->default(Stand::UNAVAILABLE_STAND);
+            $table->string('document_url')->nullable();
             $table->timestamps();
 
             // Fofeign keys

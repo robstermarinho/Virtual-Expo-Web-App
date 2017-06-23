@@ -19,7 +19,6 @@ use Illuminate\Http\Request;
 Route::resource('events', 'Event\EventController', ['only' => ['index', 'show']]);
 Route::resource('events.stands', 'Event\EventStandController', ['only' => ['index']]);
 
-
 /**
  * Users
  */

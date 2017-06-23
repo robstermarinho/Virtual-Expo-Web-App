@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -51,6 +52,23 @@ class UserController extends Controller
     {
         return response()->json($user, 200);
     }
+
+    /**
+     * Display the current User logged in
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show_current_user()
+    {
+        // Get the currently authenticated user...
+        $user = Auth::user();
+        $company = $user->company;
+        
+
+        return response()->json($user, 200);
+    }
+
 
     /**
      * Show the form for editing the specified resource.

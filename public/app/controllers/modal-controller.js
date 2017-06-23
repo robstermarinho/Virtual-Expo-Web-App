@@ -1,90 +1,48 @@
 angular.module('virtualExpoApp').controller('ModalController', ['$scope', '$http', '$uibModal', '$log', '$document', function($scope, $http, $uibModal, $log, $document){
 
 	var $ctrl = this;
-	$ctrl.items = ['item1', 'item2', 'item3'];
 
-	$ctrl.animationsEnabled = true;
-
-	$ctrl.open = function (stand, size, parentSelector) {
-		var parentElem = parentSelector ? 
-		angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+	// Open a modal with stand Detail
+	$ctrl.openStandDetail = function (stand) {
 		var modalInstance = $uibModal.open({
-			animation: $ctrl.animationsEnabled,
+			animation: true,
 			ariaLabelledBy: 'modal-title',
 			ariaDescribedBy: 'modal-body',
-			templateUrl: 'myModalContent.html',
-			controller: 'ModalInstanceCtrl',
+			templateUrl: 'modalStand.html',
+			controller: 'ModalStandCtrl',
 			controllerAs: '$ctrl',
 			size: 'lg',
-			appendTo: parentElem,
 			resolve: {
 				stand: function () {
 					return stand;
 				}
 			}
 		});
-
-		modalInstance.result.then(function (selectedItem) {
-			$ctrl.selected = selectedItem;
-		}, function () {
-			$log.info('Modal dismissed at: ' + new Date());
-		});
-	};
-
-	$ctrl.openComponentModal = function () {
-		var modalInstance = $uibModal.open({
-			animation: $ctrl.animationsEnabled,
-			component: 'modalComponent',
-			resolve: {
-				items: function () {
-					return $ctrl.items;
-				}
-			}
-		});
-
-		modalInstance.result.then(function (selectedItem) {
-			$ctrl.selected = selectedItem;
-		}, function () {
-			$log.info('modal-component dismissed at: ' + new Date());
-		});
-	};
-
-	$ctrl.openMultipleModals = function () {
-		$uibModal.open({
-			animation: $ctrl.animationsEnabled,
-			ariaLabelledBy: 'modal-title-bottom',
-			ariaDescribedBy: 'modal-body-bottom',
-			templateUrl: 'stackedModal.html',
-			size: 'lg',
-			controller: function($scope) {
-				$scope.name = 'bottom'
-			}
-		});
-
-		$uibModal.open({
-			animation: $ctrl.animationsEnabled,
-			ariaLabelledBy: 'modal-title-top',
-			ariaDescribedBy: 'modal-body-top',
-			templateUrl: 'stackedModal.html',
-			size: 'md',
-			controller: function($scope) {
-				$scope.name = 'top';  
-			}
-		});
-	};
-
-	$ctrl.toggleAnimation = function () {
-		$ctrl.animationsEnabled = !$ctrl.animationsEnabled;
 	};
 }]);
 
-angular.module('virtualExpoApp').controller('ModalInstanceCtrl', function ($uibModalInstance, stand) {
+angular.module('virtualExpoApp').controller('ModalStandCtrl', function ($uibModalInstance, stand, $uibModal) {
 	var $ctrl = this;
 	$ctrl.stand = stand;
-	$ctrl.ModalInstanceCtrl = "asdasdasd";
+	
 
-	$ctrl.ok = function () {
-		$uibModalInstance.close($ctrl.selected.item);
+	$ctrl.reserve = function () {
+		$uibModalInstance.close();
+
+		var modalInstance = $uibModal.open({
+			animation: true,
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'modalBookin.html',
+			controller: 'ModalBookinCtrl',
+			controllerAs: '$ctrl',
+			size: 'lg',
+			resolve: {
+				stand: function () {
+					return $ctrl.stand;
+				}	
+			}
+		});
 	};
 
 	$ctrl.cancel = function () {
@@ -92,31 +50,35 @@ angular.module('virtualExpoApp').controller('ModalInstanceCtrl', function ($uibM
 	};
 });
 
-// Please note that the close and dismiss bindings are from $uibModalInstance.
 
-angular.module('virtualExpoApp').component('modalComponent', {
-	templateUrl: 'myModalContent.html',
-	bindings: {
-		resolve: '<',
-		close: '&',
-		dismiss: '&'
-	},
-	controller: function () {
-		var $ctrl = this;
+angular.module('virtualExpoApp').controller('ModalBookinCtrl', function ($scope , $uibModalInstance, stand, $uibModal, $http) {
+	var $ctrl = this;
+	$ctrl.stand = stand;
+	$scope.reservation = {
 
-		$ctrl.$onInit = function () {
-			$ctrl.items = $ctrl.resolve.items;
-			$ctrl.selected = {
-				item: $ctrl.items[0]
-			};
-		};
+	};
 
-		$ctrl.ok = function () {
-			$ctrl.close({$value: $ctrl.selected.item});
-		};
+	// Get a single event
+	$scope.getCurrentUser = function(){
+		$http.get('/current_user')
+		.then(function successCallback(response) {
+			if (response.data) {
+				$scope.reservation = response.data;
+			} else {
+				$scope.message = "No info to show";
+			}}, function errorCallback(error) {
+				$scope.message = "Server Error";
+			});
 
-		$ctrl.cancel = function () {
-			$ctrl.dismiss({$value: 'cancel'});
-		};
+		$ctrl.reserve = function () {
+			$uibModalInstance.close();
+		};		
+
 	}
+
+
+
+	$ctrl.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
 });

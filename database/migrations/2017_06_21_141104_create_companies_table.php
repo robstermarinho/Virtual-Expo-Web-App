@@ -19,8 +19,7 @@ class CreateCompaniesTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('name')->nullable();
             $table->string('admin')->default(Company::REGULAR_COMPANY);
-            $table->string('logo_url');
-            $table->string('document_url')->nullable();
+            $table->string('logo_url')->nullable();
             $table->timestamps();
 
             // Fofeign keys
