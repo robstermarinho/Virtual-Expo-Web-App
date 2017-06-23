@@ -30,7 +30,7 @@ angular.module('virtualExpoApp').controller('EventController', ['$scope', '$http
 			response.data.forEach(function(stand){
 				result.push({
 					info: stand,
-					svg: $scope.svg_params[stand.photo_url]
+					svg: $scope.svg_params['stand_' + stand.id]
 				});
 			});
 			$scope.stands = result;
@@ -39,11 +39,5 @@ angular.module('virtualExpoApp').controller('EventController', ['$scope', '$http
 		}}, function errorCallback(error) {
 			$scope.message = "Server Error";
 		});
-
-	// Open stand details
-	$scope.standDetail = function(stand){
-		
-	}
-
 
 }]);

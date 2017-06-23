@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
 	    $usersQuantity = 3;
 	    $eventQuantity = 3;
 	    $standQuantity = 12;
-	    $bookinQuantity = 4;
+	    $bookinQuantity = 3;
 
 	    /**
 	     * Creating the users and their companies
@@ -80,42 +80,36 @@ class DatabaseSeeder extends Seeder
 	    factory(Stand::class)->create([
 	    	'name' => 'Pecém Stand',
 	    	'event_id' => $event_center->id,
-	    	'photo_url' => 'stand_1'
+	    	'photo_url' => 'stand-photo.png'
 	    	]);
 	    factory(Stand::class)->create([
 	    	'name' => 'Taíba Stand',
 	    	'event_id' => $event_center->id,
-	    	'photo_url' => 'stand_2'
+	    	'photo_url' => 'stand-photo.png'
 	    	]);
 	    factory(Stand::class)->create([
 	    	'name' => 'Mundaú Stand',
 	    	'event_id' => $event_center->id,
-	    	'photo_url' => 'stand_3'
+	    	'photo_url' => 'stand-photo.png'
 	    	]);
 	    factory(Stand::class)->create([
 	    	'name' => 'Almofala Stand',
 	    	'event_id' => $event_center->id,
-	    	'photo_url' => 'stand_4'
+	    	'photo_url' => 'stand-photo.png'
 	    	]);
 	    factory(Stand::class)->create([
 	    	'name' => 'Jericoacoara Stand',
 	    	'event_id' => $event_center->id,
-	    	'photo_url' => 'stand_5'
+	    	'photo_url' => 'stand-photo.png'
 	    	]);
 
-
-	    //factory(Stand::class, $standQuantity)->create();
-
 	    /**
-	     * Create the bookins and change their stand to unavailabe
+	     * Creating the bookins
 	     *
-	     */ 	    
-	    factory(Bookin::class, $bookinQuantity)->create()
-	    ->each(function($bookin){
-	    	$stand = $bookin->stand;
-	    	$stand->status = Stand::UNAVAILABLE_STAND;
-	    	$stand->save();
-	    });
+	     */ 
+
+
+	    factory(Bookin::class, $bookinQuantity)->create();
 
 
 	}

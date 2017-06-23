@@ -102,7 +102,8 @@
     <script src="<?=asset('app/bower_components/angular-google-maps/dist/angular-google-maps.min.js')?>"></script>
 
 
-    <script src="<?=asset('app/bower_components/angular-bootstrap/ui-bootstrap.min.js')?>"></script>
+    <script src="<?=asset('app/bower_components/angular-bootstrap/ui-bootstrap.min.js')?>"></script>    
+    <script src="<?=asset('app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js')?>"></script>
     <script src="<?=asset('app/bower_components/angular-route/angular-route.min.js')?>"></script>
 
     <!-- Angular main module -->
@@ -111,5 +112,6 @@
     <!-- Angular controllers -->
     <script src="<?=asset('app/controllers/home-controller.js')?>"></script>
     <script src="<?=asset('app/controllers/event-controller.js')?>"></script>
+    <script src="<?=asset('app/controllers/modal-controller.js')?>"></script>
 </body>
 </html>

@@ -1,15 +1,12 @@
-<div  class="container">
+<div ng-controller="ModalController as $ctrl"  class="container">
     <div class="row">
         <div class="col-md-12 col-leg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">{{title}}</div>
+                <div class="panel-heading"><h3>{{single_event.name}}</h3></div>
 
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">
-                           <h2>{{single_event.name}}</h2>
-                           <hr>
-                       </div>
+
                        <div class="col-lg-6">
                         <div class="event_info" ng-show="single_event">
 
@@ -50,43 +47,64 @@
                     <div class="hall_map">
                         <img class="img-responsive" src="files/events/event_{{single_event.id}}/hall_map/hall_map.png" />
 
-                        <svg height="300" 
-                        width="100%" 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <a ng-repeat="stand in stands" ng-click="standDetail(stand)">
-                            <polygon 
-                            ng-show="{{stand.info.status == 'available'}}"  
-                            points="{{stand.svg.points}}" 
-                            style="fill:lime;stroke:purple;stroke-width:1;opacity:0.5"
-                            />
-                            
-                            <text 
-                            x="{{stand.svg.text[0]}}" 
-                            y="{{stand.svg.text[1]}}">{{stand.info.name}}
-                            </text>
-                            <text 
-                            x="{{stand.svg.text[0]}}" 
-                            y="{{stand.svg.text[1] + 20}}">$ {{stand.info.price}}
-                            </text>
+                        <svg height="300" width="100%">
+                            <a ng-repeat="stand in stands" ng-click="$ctrl.open(stand)">
 
-                            <image 
-                            ng-show="{{stand.info.bookin.user.company.id}}"  
-                            xlink:href=""
-                            ng-href='files/companies/company_{{stand.info.bookin.user.company.id}}/{{stand.info.bookin.user.company.logo_url}}'
-                            a="{{stand.info.bookin.user.company.logo_url}}"
-                            x="{{stand.svg.text[0]+ 10}}" 
-                            y="{{stand.svg.text[1] + 30}}" 
-                            height="40px" 
-                            width="40px"/>
-                        </a>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
+                                <polygon ng-show="{{stand.info.status == 'available'}}" points="{{stand.svg.points}}" style="fill:lime;stroke:purple;stroke-width:1;opacity:0.5"/>
+
+                                <text ng-attr-x="{{stand.svg.text[0]}}" ng-attr-y="{{stand.svg.text[1]}}">{{stand.info.name}}</text>
+                                <text ng-attr-x="{{stand.svg.text[0]}}" ng-attr-y="{{stand.svg.text[1] + 20}}">$ {{stand.info.price}} </text>
+
+                                <image ng-show="{{stand.info.bookin.user.company.id}}" xlink:href="" ng-href='files/companies/company_{{stand.info.bookin.user.company.id}}/{{stand.info.bookin.user.company.logo_url}}' ng-attr-x="{{stand.svg.text[0]+ 10}}" ng-attr-y="{{stand.svg.text[1] + 30}}" height="40px" width="40px"/>
+
+                            </a>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-demo">
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title"> {{ $ctrl.stand.info.name }}</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-8">
+                       <img class="img-responsive" src="files/events/event_{{$ctrl.stand.info.event_id}}/stand_{{$ctrl.stand.info.id}}/{{$ctrl.stand.info.photo_url}}" />               
+                   </div>
+                   <div class="col-lg-4">
+
+                    <h4><b>Description</b></h4>
+                    <p>{{ $ctrl.stand.info.description }}</p>
+                    <h4><b>Dimensions</b></h4>
+                    <p>{{ $ctrl.stand.info.dimensions }} m2</p>                 
+                </div>             
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <b><span style="font-size: 22px; color:#3097D1;" class="pull-left">$ {{ $ctrl.stand.info.price}}</span></b>
+
+            <span ng-show="{{$ctrl.stand.info.status == 'unavailable'}}" style="font-size: 18px; color:#3097D1;" class="">Reserved!</span>
+            <button ng-show="{{$ctrl.stand.info.status == 'available'}}" class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Reserve</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="stackedModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title-{{name}}">The {{name}} modal!</h3>
+        </div>
+        <div class="modal-body" id="modal-body-{{name}}">
+            Having multiple modals open at once is probably bad UX but it's technically possible.
+        </div>
+    </script>
+
+</div>  
+
+
 </div>
