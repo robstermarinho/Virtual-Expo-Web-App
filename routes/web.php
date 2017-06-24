@@ -18,4 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// It return the current user information
 Route::get('/current_user', 'User\UserController@show_current_user');
+
+// Send report by email
+Route::post('/email', 'EmailController@send_email');

@@ -64,21 +64,21 @@ class DatabaseSeeder extends Seeder
 	    	'id' => 1,
 	    	'name' => "Beach Park Conference",
 	    	'location' => "Rua Porto das Dunas, 2734 - Porto das Dunas, Aquiraz - CE, 61700-000",
-	    	'photo_url' => "beach_park.jpg"
+	    	'photo_url' => "events/event_1/beach_park.jpg"
 	    	]);
 
 	    $event_center = factory(Event::class)->create([
 	    	'id' => 2,
 	    	'name' => "IEEE Conference 2017",
 	    	'location' => "Av. Washington Soares, 999 - Edson Queiroz, Fortaleza - CE, 60811-341",
-	    	'photo_url' => "event_center_ceara.jpg"
+	    	'photo_url' => "events/event_2/event_center_ceara.jpg"
 	    	]);
 
 	    factory(Event::class)->create([
 	    	'id' => 3,
 	    	'name' => "CBF Conference",
 	    	'location' => "Av. Alberto Craveiro, 2901 - Castelão, Fortaleza - CE, 60861-211",
-	    	'photo_url' => "castelao.jpg"
+	    	'photo_url' => "events/event_3/castelao.jpg"
 	    	]);
 
 

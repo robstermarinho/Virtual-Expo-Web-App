@@ -59,7 +59,6 @@ $factory->define(Event::class, function (Faker\Generator $faker) {
     'description' => $faker->paragraph(1),
     'start_date' => date("Y-m-d H:i:s", rand(strtotime("+60 days"),strtotime("+70 days"))),
     'end_date' => date("Y-m-d H:i:s", rand(strtotime("+80 days"),strtotime("+90 days"))),
-    'photo_url' => $faker->randomElement(['default_envent_1.png', 'default_event_2.png']),  
     ];
 });
 

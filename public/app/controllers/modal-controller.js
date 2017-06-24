@@ -21,34 +21,7 @@ angular.module('virtualExpoApp').controller('ModalController', ['$scope', '$http
 	};
 }]);
 
-angular.module('virtualExpoApp').controller('ModalStandCtrl', function ($uibModalInstance, stand, $uibModal) {
-	var $ctrl = this;
-	$ctrl.stand = stand;
-	
 
-	$ctrl.reserve = function () {
-		$uibModalInstance.close();
-
-		var modalInstance = $uibModal.open({
-			animation: true,
-			ariaLabelledBy: 'modal-title',
-			ariaDescribedBy: 'modal-body',
-			templateUrl: 'modalBookin.html',
-			controller: 'ModalBookinCtrl',
-			controllerAs: '$ctrl',
-			size: 'lg',
-			resolve: {
-				stand: function () {
-					return $ctrl.stand;
-				}	
-			}
-		});
-	};
-
-	$ctrl.cancel = function () {
-		$uibModalInstance.dismiss('cancel');
-	};
-});
 
 
 //*************************************

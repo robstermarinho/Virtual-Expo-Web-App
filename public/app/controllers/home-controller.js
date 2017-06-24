@@ -13,7 +13,7 @@ angular.module('virtualExpoApp').controller('HomeController', ['$scope', '$http'
 				response.data.forEach(function(event, index){
 					result.push({
 						info: event,
-						coords:  $scope.getCoords(event.location),
+						//coords:  $scope.getCoords(event.location),
 						options: {
 							labelContent: event.name,
 							labelAnchor:"22 0",
@@ -21,7 +21,6 @@ angular.module('virtualExpoApp').controller('HomeController', ['$scope', '$http'
 						}
 					});
 				})
-				console.log(result);
 				$scope.events = result;
 			} else {
 				$scope.message = "No events to show";
@@ -73,3 +72,6 @@ angular.module('virtualExpoApp').controller('HomeController', ['$scope', '$http'
 
 	};
 }]);
+
+
+

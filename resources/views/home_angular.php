@@ -9,7 +9,8 @@
     <meta name="csrf-token" content="<?=csrf_token();?>">
 
     <title>Virtual Expo</title>
-
+    
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAuMYvgGhGXf8WI7YEp25CIT0UGqkR5sGQ" async="" defer="defer" type="text/javascript"></script>
     <!-- Styles -->
     <link href="<?=asset('css/app.css'); ?>" rel="stylesheet">
     <link href="<?=asset('css/style.css'); ?>" rel="stylesheet">
@@ -86,8 +87,7 @@
 
     <!-- Scripts 
     <script src="<?=asset('js/app.js')?>"></script>-->
-    
-<script src="//maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBEDBx4KcJUJZcwuibQejmkfqELwnPWy9k" async="" defer="defer" type="text/javascript"></script>
+
 
     <!-- Angular scripts -->
     <script src="<?=asset('app/bower_components/angular/angular.min.js')?>"></script>
@@ -113,5 +113,12 @@
     <script src="<?=asset('app/controllers/home-controller.js')?>"></script>
     <script src="<?=asset('app/controllers/event-controller.js')?>"></script>
     <script src="<?=asset('app/controllers/modal-controller.js')?>"></script>
+    <script src="<?=asset('app/controllers/email-modal-controller.js')?>"></script>
+
+    <!-- Angular services -->
+    <script src="<?=asset('app/services/current-user.js')?>"></script>
+
+        <!-- Angular directives -->
+    <script src="<?=asset('app/directives/modal-directives.js')?>"></script>
 </body>
 </html>

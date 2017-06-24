@@ -25,7 +25,7 @@
                     <div class="event_info" ng-show="single_event">
 
                         <h2>{{single_event.info.name}}</h2>
-                        <img class="img-responsive" src="files/events/event_{{single_event.info.id}}/{{single_event.info.photo_url}}" />
+                        <img alt="event_photo" class="img-responsive" ng-src="files/{{single_event.info.photo_url}}" />
 
                         <address>
                             {{single_event.info.location}}

@@ -1,7 +1,8 @@
 var virtualExpoApp = angular.module('virtualExpoApp', 
 	['ui.bootstrap', // Handle bootstrap functions in AngularJS
 	'uiGmapgoogle-maps',
-	'ngRoute'])
+	'ngRoute',
+    'modalDirectives'])
 .config(
     ['uiGmapGoogleMapApiProvider', function(GoogleMapApiProviders) {
         GoogleMapApiProviders.configure();
