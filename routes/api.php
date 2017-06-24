@@ -23,3 +23,8 @@ Route::resource('events.stands', 'Event\EventStandController', ['only' => ['inde
  * Users
  */
 Route::resource('users', 'User\UserController', ['only' => ['index', 'show']]);
+
+/**
+ * Users
+ */
+Route::resource('bookins', 'Bookin\BookinController', ['only' => ['store']]);

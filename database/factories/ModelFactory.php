@@ -43,8 +43,7 @@ $factory->define(Company::class, function (Faker\Generator $faker) {
 
     return [
     'name' => $faker->company,
-    'admin' => $faker->randomElement([Company::ADMIN_COMPANY, Company::REGULAR_COMPANY]),
-    'logo_url' => $faker->randomElement(['default_logo_1.png', 'default_logo_2.png']),
+    'admin' => Company::REGULAR_COMPANY,
     ];
 });
 

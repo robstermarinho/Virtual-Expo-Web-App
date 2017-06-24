@@ -42,16 +42,18 @@ class DatabaseSeeder extends Seeder
 	    $usersQuantity = 3;
 	    $eventQuantity = 3;
 	    $standQuantity = 12;
-	    $bookinQuantity = 3;
+	    $bookinQuantity = 2;
 
 	    /**
-	     * Creating the users and their companies
+	     * Creating the regular users and their companies
 	     *
 	     */ 
+
 	    factory(User::class, $usersQuantity)->create()->each(function($user){
-	    	factory(Company::class)->create(['user_id' => $user, 
-	    		'logo_url' => 'company-logo.png'
-	    	]);
+	    	$company_created = factory(Company::class)->create(['user_id' => $user->id
+	    		]);
+	    	$company_created->logo_url = "companies/company_" . $company_created->id . '/company-logo.png'; 
+	    	$company_created->save();
 	    });
 
 	    /**
@@ -59,18 +61,21 @@ class DatabaseSeeder extends Seeder
 	     *
 	     */ 	    
 	    factory(Event::class)->create([
+	    	'id' => 1,
 	    	'name' => "Beach Park Conference",
 	    	'location' => "Rua Porto das Dunas, 2734 - Porto das Dunas, Aquiraz - CE, 61700-000",
 	    	'photo_url' => "beach_park.jpg"
 	    	]);
 
 	    $event_center = factory(Event::class)->create([
+	    	'id' => 2,
 	    	'name' => "IEEE Conference 2017",
 	    	'location' => "Av. Washington Soares, 999 - Edson Queiroz, Fortaleza - CE, 60811-341",
 	    	'photo_url' => "event_center_ceara.jpg"
 	    	]);
 
 	    factory(Event::class)->create([
+	    	'id' => 3,
 	    	'name' => "CBF Conference",
 	    	'location' => "Av. Alberto Craveiro, 2901 - Castelão, Fortaleza - CE, 60861-211",
 	    	'photo_url' => "castelao.jpg"
@@ -82,26 +87,31 @@ class DatabaseSeeder extends Seeder
 	     *
 	     */
 	    factory(Stand::class)->create([
+	    	'id' => 1,
 	    	'name' => 'Pecém Stand',
 	    	'event_id' => $event_center->id,
 	    	'photo_url' => 'stand-photo.png'
 	    	]);
 	    factory(Stand::class)->create([
+	    	'id' => 2,
 	    	'name' => 'Taíba Stand',
 	    	'event_id' => $event_center->id,
 	    	'photo_url' => 'stand-photo.png'
 	    	]);
 	    factory(Stand::class)->create([
+	    	'id' => 3,
 	    	'name' => 'Mundaú Stand',
 	    	'event_id' => $event_center->id,
 	    	'photo_url' => 'stand-photo.png'
 	    	]);
 	    factory(Stand::class)->create([
+	    	'id' => 4,
 	    	'name' => 'Almofala Stand',
 	    	'event_id' => $event_center->id,
 	    	'photo_url' => 'stand-photo.png'
 	    	]);
 	    factory(Stand::class)->create([
+	    	'id' => 5,
 	    	'name' => 'Jericoacoara Stand',
 	    	'event_id' => $event_center->id,
 	    	'photo_url' => 'stand-photo.png'
@@ -126,10 +136,20 @@ class DatabaseSeeder extends Seeder
 	    	// Creating the marketing documents
 	    	Storage::disk('files')->put($doc_url, 'Marketing Doc for '.$stand->name);
 
-	    	$stand->document_url = $file_name;
+	    	$stand->document_url = $doc_url;
 	    	$stand->save();
 	    });
 
+
+	    // Creatinf the admin user and company
+	    $admin_user = factory(User::class)->create([
+	    	"name" => "admin",
+	    	"email" => "admin@admin.com",
+	    ]);
+
+	    factory(Company::class)->create(['user_id' => $admin_user->id,
+	    	'admin' => Company::ADMIN_COMPANY
+	    	]);
 
 	}
 }

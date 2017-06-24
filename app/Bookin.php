@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bookin extends Model
 {
+
+    protected $fillable = ['user_id', 'event_id', 'stand_id', 'price'];
+
+
     /**
      * It returns the user responsible for this booking
      *
