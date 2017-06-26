@@ -1,0 +1,35 @@
+<script type="text/ng-template" id="modalStand.html">
+    <div class="modal-header">
+    <h3 class="modal-title" id="modal-title"> {{ stand.info.name }}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+
+        <div class="row">
+            <div class="col-lg-8">
+             <img alt="photo_url" class="img-responsive" src="files/events/event_{{stand.info.event_id}}/stand_{{stand.info.id}}/{{stand.info.photo_url}}" />               
+         </div>
+         <div class="col-lg-4">
+
+            <p><b>Description</b></p>
+            <p>{{ stand.info.description }}</p>
+            <p><b>Dimensions</b></p>
+            <p>{{ stand.info.dimensions }} m2</p> 
+
+            <div ng-show="{{stand.info.status == 'unavailable'}}" class="reserved_label">
+                <p><b>Reserved by: </b> {{ stand.info.bookin.user.company.name }}</p>
+                <img alt="logo_url" src="files/{{stand.info.bookin.user.company.logo_url}}" height="60px" width="60px" />
+
+                <a href="files/{{stand.info.document_url}}" download>Marketing Documents</a>
+            </div>
+        </div>                
+    </div>             
+
+    <div class="modal-footer">
+        <b><span style="font-size: 22px; color:#3097D1;" class="pull-left">$ {{stand.info.price}}</span></b>
+
+        <span ng-show="{{stand.info.status == 'unavailable'}}" style="font-size: 18px; color:#3097D1;" class="">Reserved!</span>
+        <button ng-show="{{stand.info.status == 'available'}}" class="btn btn-primary" type="button" ng-click="reserve()">Reserve</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+
+</script>

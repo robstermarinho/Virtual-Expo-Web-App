@@ -74,7 +74,7 @@ $factory->define(Stand::class, function (Faker\Generator $faker) {
     'description' => $faker->paragraph(1),
     'price' => $faker->randomFloat(2, $min = 500, $max = 10000),
     'dimensions' => $faker->randomNumber(4),
-    'photo_url' => $faker->randomElement(['default_stand_1.png', 'default_stand_2.png']),          
+    'photo_url' => 'stand-photo.png',          
     'status' => Stand::AVAILABLE_STAND,
     ];
 });

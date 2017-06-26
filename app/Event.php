@@ -7,6 +7,7 @@ namespace App;
 
 use App\Stand;
 use App\Bookin;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -26,5 +27,18 @@ class Event extends Model
      */
     public function stands(){
         return $this->hasMany(Stand::class, 'event_id');
-    }    
+    }
+
+    /**
+     * Mutators for start date and end date
+     *
+     * @return Carbon\Carbon
+     */
+    public function getStartDateAttribute($date){
+        return Carbon::parse($date)->formatLocalized('%m/%d/%Y');
+    }
+    public function getEndDateAttribute($date){
+        return Carbon::parse($date)->formatLocalized('%m/%d/%Y');
+    }
+
 }

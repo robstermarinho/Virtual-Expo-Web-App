@@ -3,13 +3,13 @@
         <div class="col-md-12 col-leg-12">
 
             <div class="panel panel-default">
-                <div class="panel-heading">{{title}}
+                <div class="panel-heading">Choose one event in the map
                 </div>
                 <div class="panel-body">
 
                  <div class="row">
-                     <div class="col-lg-6">
-                         <h2>Choose one event in the map</h2>
+                     <div class="col-lg-8">
+
                          <ui-gmap-google-map center='map.center' zoom='map.zoom'>
                             <ui-gmap-marker ng-repeat="event in events"
                             idKey='event.info.id'
@@ -20,37 +20,43 @@
                     </ui-gmap-google-map>
 
                 </div>
-
-                <div class="col-lg-6">
-                    <div class="event_info" ng-show="single_event">
-
-                        <h2>{{single_event.info.name}}</h2>
-                        <img alt="event_photo" class="img-responsive" ng-src="files/{{single_event.info.photo_url}}" />
-
-                        <address>
-                            {{single_event.info.location}}
-                        </address> 
-                        <p>{{single_event.info.description}}</p>
-                        <p>{{single_event.info.start_date}}</p>
-                        <p>{{single_event.info.end_date}}</p>
-                        <a href="/home#!/event/{{single_event.info.id}}" class="btn btn-primary">Book your place</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-4">
-                    <table class="table table-striped table-hover" ng-init="getAllEvents()">
-                        <tr ng-repeat="event in events">
-                            <td> {{event.info.name}}</td>
-                        </tr>
-                    </table>
+                   <div class="list-group" ng-init="getAllEvents()">
+                      <a style="cursor: pointer;" ng-repeat="event in events" ng-click="eventInfo(event)" class="list-group-item">{{event.info.name}}</a>
+                  </div> 
+
+              </div>
+              <div class="event_info" ng-show="single_event">
+                <div class="col-lg-6">
+
+
+                    <h2>{{single_event.info.name}}</h2>
+                    <img alt="event_photo" class="img-responsive" ng-src="files/{{single_event.info.photo_url}}" />
+
+
+                </div>
+                <div class="col-lg-6" style="margin-top:54px;">
+
+                    <h4>Description</h4>
+                    <p>{{single_event.info.description}}</p>
+
+                    <h4>Location</h4>
+                    <address>
+                        {{single_event.info.location}}
+                    </address> 
+
+                    <h4>Dates</h4>
+                    <p><b>Start:</b> {{single_event.info.start_date}} | <b>End:</b>{{single_event.info.end_date}}</p>
+                    <a href="/home#!/event/{{single_event.info.id}}" class="btn btn-primary">Book your place</a>
                 </div>
             </div>
-
-
-
         </div>
+
+
+
+
     </div>
+</div>
 </div>
 </div>
 </div>

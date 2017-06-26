@@ -8,12 +8,14 @@
 				<div class="form-group">		
 					<label>Email</label>
 					<input placeholder="Email" class="form-control" type="text" name="email" ng-model="email"/>
+					<p ng-show="msg.error.length > 0" class="alert alert-danger">{{msg.error}}</p>
+					<p ng-show="msg.success.length >0" class="alert alert-success">{{msg.success}}</p>
 				</div>  
 			</div>           
 		</div>
 	</div>             
 	<div class="modal-footer">
-		<button ng-click="sendEmailReport()" class="btn btn-primary" type="button" >Send</button>
+		<button ng-disabled="btn_status" ng-click="sendEmailReport()" class="btn btn-primary" type="button" >Send</button>
 		<button ng-click="cancel()" class="btn btn-warning" type="button">Cancel</button>
 	</div>
 </script>

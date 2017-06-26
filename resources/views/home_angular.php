@@ -10,7 +10,7 @@
 
     <title>Virtual Expo</title>
     
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAuMYvgGhGXf8WI7YEp25CIT0UGqkR5sGQ" async="" defer="defer" type="text/javascript"></script>
+
     <!-- Styles -->
     <link href="<?=asset('css/app.css'); ?>" rel="stylesheet">
     <link href="<?=asset('css/style.css'); ?>" rel="stylesheet">
@@ -66,59 +66,66 @@
                                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                                             Logout
-                                        </a>
-
+                                        </a>     
                                         <form id="logout-form" action="<?=route('logout')?>" method="POST" style="display: none;">
-                                            <?=csrf_field()?>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        <?php endif;?>
-                    </ul>
-                </div>
+                                        <?=csrf_field()?>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php endif;?>
+                </ul>
             </div>
-        </nav>
-        <div ng-view>
-            
         </div>
+    </nav>
+    <div ng-view>
 
     </div>
 
-    <!-- Scripts 
-    <script src="<?=asset('js/app.js')?>"></script>-->
-
-
-    <!-- Angular scripts -->
-    <script src="<?=asset('app/bower_components/angular/angular.min.js')?>"></script>
-    
-    <!-- Maps scripts -->
-    <script src="<?=asset('app/bower_components/lodash/lodash.js')?>"></script>
-    <script src="<?=asset('app/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js')?>"></script>
+</div>
 
 
 
+<!-- Angular scripts -->
+<script src="<?=asset('app/bower_components/angular/angular.min.js')?>"></script>
 
-    <script src="<?=asset('app/bower_components/angular-google-maps/dist/angular-google-maps.min.js')?>"></script>
 
 
-    <script src="<?=asset('app/bower_components/angular-bootstrap/ui-bootstrap.min.js')?>"></script>    
-    <script src="<?=asset('app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js')?>"></script>
-    <script src="<?=asset('app/bower_components/angular-route/angular-route.min.js')?>"></script>
+<script src="<?=asset('app/bower_components/angular-bootstrap/ui-bootstrap.min.js')?>"></script>    
+<script src="<?=asset('app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js')?>"></script>
+<script src="<?=asset('app/bower_components/angular-route/angular-route.min.js')?>"></script>
 
-    <!-- Angular main module -->
-    <script src="<?=asset('app/app.js')?>"></script>
 
-    <!-- Angular controllers -->
-    <script src="<?=asset('app/controllers/home-controller.js')?>"></script>
-    <script src="<?=asset('app/controllers/event-controller.js')?>"></script>
-    <script src="<?=asset('app/controllers/modal-controller.js')?>"></script>
-    <script src="<?=asset('app/controllers/email-modal-controller.js')?>"></script>
+<!-- Google Maps scripts -->
+<script src="<?=asset('app/bower_components/lodash/lodash.js')?>"></script>
+<script src="<?=asset('app/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js')?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAuMYvgGhGXf8WI7YEp25CIT0UGqkR5sGQ" async="" defer="defer" type="text/javascript"></script>
+<script src="<?=asset('app/bower_components/angular-google-maps/dist/angular-google-maps.min.js')?>"></script>
 
-    <!-- Angular services -->
-    <script src="<?=asset('app/services/current-user.js')?>"></script>
 
-        <!-- Angular directives -->
-    <script src="<?=asset('app/directives/modal-directives.js')?>"></script>
+<!-- Angular main module -->
+<script src="<?=asset('app/app.js')?>"></script>
+<!-- Angular services -->
+<script src="<?=asset('app/services/current-user.js')?>"></script>
+<script src="<?=asset('app/services/file-upload.js')?>"></script>
+
+<!-- Angular controllers -->
+<script src="<?=asset('app/controllers/home-controller.js')?>"></script>
+<script src="<?=asset('app/controllers/event-controller.js')?>"></script>
+
+<!-- Modals -->
+<script src="<?=asset('app/controllers/email-modal-controller.js')?>"></script>
+<script src="<?=asset('app/controllers/stand-modal-controller.js')?>"></script>
+<script src="<?=asset('app/controllers/reservation-modal-controller.js')?>"></script>
+
+
+<!-- Angular directives -->
+<script src="<?=asset('app/directives/modal-directives.js')?>"></script>
+
+
+
+
+
+
 </body>
 </html>

@@ -15,7 +15,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.6.4"
+    "angular": "^1.6.4",
+    "angular-mocks": "^1.6.4",
+    "font-awesome": "^4.7.0"
   },
   "devDependencies": {
     "angular-google-maps": "^2.4.1",

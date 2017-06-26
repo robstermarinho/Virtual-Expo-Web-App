@@ -1,4 +1,4 @@
-<div ng-controller="ModalController as $ctrl"  class="container">
+<div   class="container">
     <div class="row">
         <div class="col-md-12 col-leg-12">
             <div class="panel panel-default">
@@ -11,7 +11,7 @@
 
                     <div class="row">
 
-                     <div class="col-lg-6">
+                       <div class="col-lg-6">
                         <div class="event_info" ng-show="single_event">
 
                             <img class="img-responsive" src="files/{{single_event.photo_url}}" />
@@ -19,17 +19,24 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
+
+                        <h4>Description</h4>
                         <p>{{single_event.description}}</p>
-                        <address>{{single_event.location}}</address> 
-                        <p>{{single_event.start_date}}</p>
-                        <p>{{single_event.end_date}}</p>
+
+                        <h4>Location</h4>
+                        <address>
+                            {{single_event.location}}
+                        </address> 
+
+                        <h4>Dates</h4>
+                        <p><b>Start:</b> {{single_event.start_date}} | <b>End:</b>{{single_event.end_date}}</p>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                 <hr>
-             </div> 
-             <div class="row">
-                <div class="col-lg-3">
+                   <hr>
+               </div> 
+               <div class="row" ng-init="getSVGParams()">
+                <div class="col-lg-3" ng-init="getAllStands()">
                     <h2>List of Stands</h2>
                     <table class="table table-striped table-hover">
                         <thead>
@@ -52,8 +59,8 @@
 
                     </table>
 
-                    <button class="btn btn-primary" ng-click="openEmailModal()">
-                        Send
+                    <button ng-show="current_user.company.admin == 'true'" class="btn btn-primary" ng-click="openEmailModal()">
+                        Send Report
                     </button>
 
                 </div>
@@ -62,7 +69,7 @@
                         <img class="img-responsive" src="files/events/event_{{single_event.id}}/hall_map/hall_map.png" />
 
                         <svg height="300" width="100%">
-                            <a ng-repeat="stand in stands" ng-click="$ctrl.openStandDetail(stand)">
+                            <a ng-repeat="stand in stands" ng-click="openStandDetail(stand)">
 
                                 <polygon ng-show="{{stand.info.status == 'available'}}" points="{{stand.svg.points}}" style="fill:lime;stroke:purple;stroke-width:1;opacity:0.5"/>
 
@@ -81,107 +88,9 @@
     </div>
 
     <div class="modal-demo">
-        <script type="text/ng-template" id="modalStand.html">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modal-title"> {{ $ctrl.stand.info.name }}</h3>
-            </div>
-            <div class="modal-body" id="modal-body">
+        <modal-stand></modal-stand>
 
-                <div class="row">
-                    <div class="col-lg-8">
-                     <img alt="photo_url" class="img-responsive" src="files/events/event_{{$ctrl.stand.info.event_id}}/stand_{{$ctrl.stand.info.id}}/{{$ctrl.stand.info.photo_url}}" />               
-                 </div>
-                 <div class="col-lg-4">
-
-                    <p><b>Description</b></p>
-                    <p>{{ $ctrl.stand.info.description }}</p>
-                    <p><b>Dimensions</b></p>
-                    <p>{{ $ctrl.stand.info.dimensions }} m2</p> 
-
-                    <div ng-show="{{$ctrl.stand.info.status == 'unavailable'}}" class="reserved_label">
-                        <p><b>Reserved by: </b> {{ $ctrl.stand.info.bookin.user.company.name }}</p>
-                        <img alt="logo_url" src="files/{{$ctrl.stand.info.bookin.user.company.logo_url}}" height="60px" width="60px" />
-
-                        <a href="files/{{$ctrl.stand.info.document_url}}" download>Marketing Documents</a>
-                    </div>
-                </div>                
-            </div>             
-
-            <div class="modal-footer">
-                <b><span style="font-size: 22px; color:#3097D1;" class="pull-left">$ {{ $ctrl.stand.info.price}}</span></b>
-
-                <span ng-show="{{$ctrl.stand.info.status == 'unavailable'}}" style="font-size: 18px; color:#3097D1;" class="">Reserved!</span>
-                <button ng-show="{{$ctrl.stand.info.status == 'available'}}" class="btn btn-primary" type="button" ng-click="$ctrl.reserve()">Reserve</button>
-                <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-            </div>
-        </script>
-
-        <script type="text/ng-template" id="modalBookin.html">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modal-title"> Reservation - {{ $ctrl.stand.info.name }}</h3>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form ng-init="getCurrentUser()" novalidate name="reservation_form" ng-submit="confirmReservation()" enctype="multipart/form-data">
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" ng-model="current_user.name"  name="username" class="form-control" disabled="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="text" ng-model="current_user.email"  name="email" class="form-control" disabled="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Company Name</label>
-                                        <input type="text" ng-model="reservation.company_name"  name="compnay_name" class="form-control" >
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div  class="form-group">
-                                        <label>File</label>
-                                        <input file-model="logo_file" type="file"  name="logo" />
-                                    </div>
-
-                                    <div ng-show="current_user.company.logo_url" class="form-group">
-                                        <img alt="logo_url" width="60px" ng-src="files/{{current_user.company.logo_url}}"/>
-                                    </div>        
-                                </div>
-                                <div class="col-lg-6">
-                                    <div  class="form-group">
-                                        <label>Document</label>
-                                        <input file-model="doc_file" type="file"  name="document" />
-                                    </div>
-
-                                    <div ng-show="current_user.stand.document_url" class="form-group">
-                                        <a href="files/events/event_{{$ctrl.stand.info.event_id}}/stand_{{$ctrl.stand.info.id}}/{{$ctrl.stand.info.document_url}}">Marketing Document</a>
-                                    </div>        
-                                </div>
-                            </div>
-
-
-                        </form>   
-                    </div>           
-                </div>
-
-            </div>             
-
-            <div class="modal-footer">
-                <b><span style="font-size: 22px; color:#3097D1;" class="pull-left">$ {{ $ctrl.stand.info.price}}</span></b>
-
-                <span ng-show="{{$ctrl.stand.info.status == 'unavailable'}}" style="font-size: 18px; color:#3097D1;" class="">Reserved!</span>
-                <button ng-show="{{$ctrl.stand.info.status == 'available'}}" class="btn btn-primary" type="button" ng-click="confirmReservation()">Confirm Reservation</button>
-                <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-            </div>
-        </script>
+        <modal-reservation></modal-reservation>
 
 
         <modal-email></modal-email>

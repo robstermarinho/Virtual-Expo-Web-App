@@ -1,7 +1,12 @@
 // Email Modal controller
-angular.module('virtualExpoApp').controller('emailController', function($http, $scope, currentUser, $uibModalInstance) {
+angular.module('virtualExpoApp').controller('emailModalController', function($http, $scope, currentUser, $uibModalInstance) {
 
 	$scope.email = "";
+	$scope.msg = {
+		error : "",
+		success : ""
+	};
+	$scope.btn_status = false;
 
 	// get current user email
 	currentUser.user().then(function(data){
@@ -17,11 +22,16 @@ angular.module('virtualExpoApp').controller('emailController', function($http, $
 
 	// Send email action
 	$scope.sendEmailReport = function(){
+		$scope.btn_status = true;
 		$http.post('email', {email : $scope.email})
 		.then(function successCallback(response) {
-			console.log(response);
+			$scope.msg.success = response.data.msg;
+			$scope.msg.error = "";
+			$scope.btn_status = false;
 		}, function errorCallback(error) {
-			console.log(response);
+			$scope.msg.error = error.data.msg;
+			$scope.msg.success = "";
+			$scope.btn_status = false;
 		});
 	}
 });
