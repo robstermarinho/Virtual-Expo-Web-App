@@ -20,7 +20,7 @@ composer install
 ```
 Go inside `public/app` and run the following comand:
 ```
-composer install
+bower install
 ```
 
 ### Environment variables
